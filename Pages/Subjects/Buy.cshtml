@@ -1,0 +1,45 @@
+﻿@page
+@model TechnicalAssesmentOracle.Pages.Subjects.BuyModel
+
+@{
+    ViewData["Title"] = "Technical Assesment Oracle";
+    ViewData["Page"] = "Subjects";
+}
+
+<h1>Buy</h1>
+
+<h4>Subject</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubjectBuy.MedicationName" class="control-label"></label>
+                <select asp-for="SubjectBuy.MedicationName" class="form-control">
+                    @foreach (var medication in Model.Medications)
+                    {
+                        <option value="@medication.Name">@medication.Name</option>
+                    }
+                </select>
+                <span asp-validation-for="SubjectBuy.MedicationName" class="text-danger">@Model.MedicationError</span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SubjectBuy.Quantity" class="control-label"></label>
+                <input asp-for="SubjectBuy.Quantity" class="form-control" />
+                <span asp-validation-for="SubjectBuy.Quantity" class="text-danger">@Model.QuantityError</span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Request" class="btn btn-primary" asp-route-id="@Model.Subject.ID" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="./Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

@@ -1,0 +1,49 @@
+﻿@page
+@model TechnicalAssesmentOracle.Pages.MedicationDistributions.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>MedicationDistribution</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="MedicationDistribution.SubjectId" class="control-label"></label>
+                <select asp-for="MedicationDistribution.SubjectId" class="form-control">
+                    @foreach (var selection in Model.Subjects)
+                    {
+                        <option value="@selection.ID">@selection.ID</option>
+                    }
+                </select>
+                <span asp-validation-for="MedicationDistribution.SubjectId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="MedicationDistribution.MedicationId" class="control-label"></label>
+                <select asp-for="MedicationDistribution.MedicationId" class="form-control" asp-items="ViewBag.MedicationId">
+                    @foreach (var selection in Model.Medications)
+                    {
+                        <option value="@selection.ID">@selection.ID</option>
+                    }
+                </select>
+                <span asp-validation-for="MedicationDistribution.MedicationId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-page="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
